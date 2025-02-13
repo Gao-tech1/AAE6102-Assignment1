@@ -30,7 +30,7 @@ Decode the **navigation message** and extract key parameters, such as **ephemeri
 
 ### **Task 4 – Position and Velocity Estimation**  
 Using **pseudorange measurements** from tracking, implement the **Weighted Least Squares (WLS)** algorithm to compute the **user's position and velocity**.  
-- Plot the user **position**.  
+- Plot the user **position** and **velocity**.  
 - Compare the results with the **ground truth**.  
 - Discuss the impact of **multipath effects** on the WLS solution.
 
