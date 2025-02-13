@@ -40,7 +40,7 @@ Develop an **Extended Kalman Filter (EKF)** using **pseudorange and Doppler meas
 ## Submission Guidelines  
 - Submit a **technical report (PDF format)** and **source code** via **GitHub (private repository)**.
 - Share the GitHub repository link via email with:  
-  - **Dr. Hoi-Fung Ng** (ivannhf.ng@connect.polyu.hk)  
+  - **Dr. Hoi-Fung Ng** (hf-ivan.ng@connect.polyu.hk)  
   - Other **teaching assistants**  
   - The **course lecturer**  
 - **Deadline:** 13 March 2024  
