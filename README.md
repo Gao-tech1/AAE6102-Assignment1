@@ -12,10 +12,10 @@ This assignment focuses on processing **GNSS Software-Defined Receiver (SDR) sig
 
 ### Dataset Information  
 
-| Environment | Carrier Frequency | IF Frequency | Sampling Frequency | Data Format | Ground Truth Coordinates | Data Length |
-|------------|------------------|--------------|-------------------|------------|-----------------------|------------|
-| Open-Sky  | 1575.42 MHz | 4.58 MHz | 58 MHz | 8-bit I/Q samples | (22.328444770087565, 114.1713630049711) | 90 seconds |
-| Urban     | 1575.42 MHz | 0 MHz | 26 MHz | 8-bit I/Q samples | (22.3198722, 114.209101777778) | 90 seconds |
+| Environment | Carrier Frequency | IF Frequency | Sampling Frequency | Data Format | Ground Truth Coordinates | Data Length | Collection Date (HKT) |
+|------------|------------------|--------------|-------------------|------------|-----------------------|------------|-----------------|
+| Open-Sky  | 1575.42 MHz | 4.58 MHz | 58 MHz | 8-bit I/Q samples | (22.328444770087565, 114.1713630049711) | 90 seconds | 14/10/2021|
+| Urban     | 1575.42 MHz | 0 MHz | 26 MHz | 8-bit I/Q samples | (22.3198722, 114.209101777778) | 90 seconds | 07/06/2019 12.48pm |
 
 ![image](https://github.com/IPNL-POLYU/AAE6102-assignments/blob/main/Picture1.png)
 
