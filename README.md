@@ -45,7 +45,7 @@ Develop an **Extended Kalman Filter (EKF)** using **pseudorange and Doppler meas
   - **Dr. Hoi-Fung Ng** (hf-ivan.ng@connect.polyu.hk)  
   - Other **teaching assistants**  
   - The **course lecturer**  
-- **Deadline:** 13 March 2024  
+- **Deadline:** 13 March 2025  
 
 ---
 *This repository contains the source code and documentation for Assignment 1 of AAE6102.*  
