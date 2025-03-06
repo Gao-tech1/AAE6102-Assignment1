@@ -5,7 +5,7 @@
 ### The Hong Kong Polytechnic University  
 **Department of Aeronautical and Aviation Engineering**  
 
-**Due Date:** 13 March 2024  
+**Due Date:** 13 March 2025  
 
 ## Overview  
 This assignment focuses on processing **GNSS Software-Defined Receiver (SDR) signals** to develop a deeper understanding of **GNSS signal processing**. Students will analyze **two real Intermediate Frequency (IF) datasets** collected in different environments: **open-sky** and **urban**. The urban dataset contains **multipath and non-line-of-sight (NLOS) effects**, which can degrade positioning accuracy.
