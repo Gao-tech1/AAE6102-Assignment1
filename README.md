@@ -7,6 +7,24 @@
 
 **Due Date:** 13 March 2025  
 
+## Table of Contents
+[AAE6102 Assignment 1](#aae6102-assignment-1)
+- [AAE6102 Assignment 1](#aae6102-assignment-1)
+  - [Satellite Communication and Navigation (2024/25 Semester 2)](#satellite-communication-and-navigation-202425-semester-2)
+    - [The Hong Kong Polytechnic University](#the-hong-kong-polytechnic-university)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+    - [Dataset Information](#dataset-information)
+  - [Assignment Tasks](#assignment-tasks)
+    - [**Task 1 – Acquisition**](#task-1--acquisition)
+    - [**Task 2 – Tracking**](#task-2--tracking)
+    - [**Task 3 – Navigation Data Decoding**](#task-3--navigation-data-decoding)
+    - [**Task 4 – Position and Velocity Estimation**](#task-4--position-and-velocity-estimation)
+    - [**Task 5 – Kalman Filter-Based Positioning**](#task-5--kalman-filter-based-positioning)
+  - [Acknowledgement](#acknowledgement)
+  - [References](#references)
+
+
 ## Overview  
 This assignment focuses on processing **GNSS Software-Defined Receiver (SDR) signals** to develop a deeper understanding of **GNSS signal processing**. Students will analyze **two real Intermediate Frequency (IF) datasets** collected in different environments: **open-sky** and **urban**. The urban dataset contains **multipath and non-line-of-sight (NLOS) effects**, which can degrade positioning accuracy.
 
@@ -76,16 +94,17 @@ Adapt the **tracking loop (DLL)** to generate **correlation plots** and analyze 
 </p>
 <p align="center">Figure 2.4 Tracking Results for Urban PRN 1</p>
 
-**Impact of Urban Interference**  
-- Multipath Effects: Reflected signals cause constructive and destructive interference, leading to distorted correlation peaks.  
-- NLOS Receptions: Signals arriving via indirect paths introduce biases in the pseudorange measurements.  
-- Signal Attenuation: Buildings and other structures can attenuate the signal, reducing the signal-to-noise ratio (SNR) for satellites of Channel 3 and Channel 4.    
+**Discussion**
 
-**Discussion**  
-- In the open-sky environment, the DLL performs well with clear correlation peaks, allowing for accurate tracking.  
-- In the urban environment, the DLL performance degrades due to interference, resulting in less accurate and less stable tracking.  
-Multiple correlators help in maintaining lock by providing a more robust estimate of the signal phase.
+| Channel                              | 1                | 2                | 3                | 4                | 5                |
+|--------------------------------------|------------------|------------------|------------------|------------------|------------------|
+| Mean CNo in open sky | 36.961 | 36.770 | 36.288 | 35.288 | 36.090 |
+| Mean CNo in urban | 52.658 | 46.190 | 38.830 | 37.574 | /     |
 
+**Impact of Urban Interference**
+- **Higher CNo in urban**: Although reflected signals can cause both constructive and destructive interference, the results show higher CNo values in urban environments. This may be due to factors such as antenna gain or other influences that need to be evaluated in future research.
+- **Pseudorange bias**: Signals arriving via NLOS (Non-Line-of-Sight) paths introduce biases in the pseudorange measurements, affecting the accuracy of positioning.
+- **Difficulty in finding peak**: In open sky environments, the DLL (Delay Lock Loop) performs well with clear correlation peaks, enabling accurate tracking. However, in urban environments, the DLL performance degrades due to interference, resulting in broader correlation peaks and making accurate tracking more challenging.
 ---
 
 ### **Task 3 – Navigation Data Decoding**  
@@ -150,7 +169,7 @@ Where:
 - $\mathbf{x}$ is the state vector (position and velocity).
 - $\mathbf{y}$ is the vector of pseudorange measurements.
 - $\mathbf{H}$ is the design matrix that maps the state vector to the measurements.
-- $\mathbf{W}$ is the weight matrix, which is a diagonal matrix, with its diagonal elements being sin(el).
+- $\mathbf{W}$ is the weight matrix. In the WLS position solving, $\mathbf{W}$ is a diagonal matrix with diagonal elements being sin(el). And in the velocity solving, W is set as the identity matrix $I$ (According to RTKLIB <sup>1</sup>)
 
 The solution is obtained by solving:
 
@@ -170,8 +189,9 @@ $$
 </p>
 <p align="center">Figure 4.2 WLS Position Results for Urban</p>
 
-- Discuss the impact of **multipath effects** on the WLS solution.  
-Multipath effects cause signal reflections and interference, leading to biased pseudorange and doppler frequency measurements. In urban areas, this results in wider and less defined correlation peaks, making it harder for the DLL to maintain lock. Consequently, the WLS solution experiences larger position and velocity errors due to these distorted measurements, significantly degrading overall positioning accuracy.
+**Discussion**
+ - Both position and velocity errors are greater in urban scenarios than in open-sky ones. This is mainly attributed to the pseudorange and Doppler frequency measurement errors caused by multipath effects and non-line-of-sight (NLOS) propagation, which make accurate location determination more challenging.  
+ - In urban settings, the Doppler frequency for channel 2 may exceed 4.0e3, which is much higher than that of the other channels. This discrepancy prevents the WLS receiver velocity from converging and introduces significant errors. However, as there are only four acquired satellites, I cannot perform fault detection and exclusion.
 
 ---
 
@@ -187,13 +207,13 @@ The EKF algorithm consists of two main steps: prediction and update.
 
 **Prediction Step:**  
 
-$$
+```math
 \mathbf{x}_{k|k-1} = f(\mathbf{x}_{k-1|k-1}, \mathbf{u}_k)
-$$
+```
 
-$$
+```math
 \mathbf{P}_{k|k-1} = \mathbf{F}_k \mathbf{P}_{k-1|k-1} \mathbf{F}_k^T + \mathbf{Q}_k
-$$
+```
 
 Where:
 <ul>
@@ -207,25 +227,25 @@ Where:
 
 **Update Step:**  
 
-$$
-\mathbf{y}_k = \mathbf{z}_k - h(\mathbf{x}_{k|k-1})
-$$
+```math
+\mathbf{y}_k=\mathbf{z}_k-h\left(\mathbf{x}_{k \mid k-1}\right)
+```
 
-$$
-\mathbf{S}_k = \mathbf{H}_k \mathbf{P}_{k|k-1} \mathbf{H}_k^T + \mathbf{R}_k
-$$
+```math
+\mathbf{S}_k=\mathbf{H}_k \mathbf{P}_{k \mid k-1} \mathbf{H}_k^T+\mathbf{R}_k
+```
 
-$$
-\mathbf{K}_k = \mathbf{P}_{k|k-1} \mathbf{H}_k^T \mathbf{S}_k^{-1}
-$$
+```math
+\mathbf{K}_k=\mathbf{P}_{k \mid k-1} \mathbf{H}_k^T \mathbf{S}_k^{-1}
+```
 
-$$
-\mathbf{x}_{k|k} = \mathbf{x}_{k|k-1} + \mathbf{K}_k \mathbf{y}_k
-$$
+```math
+\mathbf{x}_{k \mid k}=\mathbf{x}_{k \mid k-1}+\mathbf{K}_k \mathbf{y}_k
+```
 
-$$
-\mathbf{P}_{k|k} = (\mathbf{I} - \mathbf{K}_k \mathbf{H}_k) \mathbf{P}_{k|k-1}
-$$
+```math
+\mathbf{P}_{k \mid k}=\left(\mathbf{I}-\mathbf{K}_k \mathbf{H}_k\right) \mathbf{P}_{k \mid k-1}
+```
 
 Where:
 <ul>
@@ -260,6 +280,10 @@ Where:
 </p>
 <p align="center">Figure 5.4 Urban Velocity Solution with WLS and EKF</p>
 
+**Discution:**  
+ - The results show that the WLS position solution may outperform the EKF solution. This is attributed to the errors in the Doppler frequency, which impact the predicted state and subsequently introduce inaccuracies in the solutions.
+ - However, the velocity results obtained from the EKF are superior to those from WLS. The EKF, with its recursive update mechanism and noise suppression capability, is generally more effective in handling errors and maintaining relatively stable estimation results.
+
 ---
 
 ## Acknowledgement
@@ -270,3 +294,4 @@ Thanks for kimichat polishing the format.
 
 ## References
 1. Takasu Tomoji. (2009). RTKLIB: Open Source Program Package for RTK-GPS. FOSS4G 2009. Tokyo, Japan, November 2, 2009.
+2. SoftGNSS (https://github.com/TMBOC/SoftGNSS)
