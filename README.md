@@ -8,11 +8,7 @@
 **Due Date:** 13 March 2025  
 
 ## Table of Contents
-[AAE6102 Assignment 1](#aae6102-assignment-1)
-- [AAE6102 Assignment 1](#aae6102-assignment-1)
-  - [Satellite Communication and Navigation (2024/25 Semester 2)](#satellite-communication-and-navigation-202425-semester-2)
-    - [The Hong Kong Polytechnic University](#the-hong-kong-polytechnic-university)
-  - [Table of Contents](#table-of-contents)
+
   - [Overview](#overview)
     - [Dataset Information](#dataset-information)
   - [Assignment Tasks](#assignment-tasks)
