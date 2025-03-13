@@ -185,24 +185,27 @@ The EKF is a recursive algorithm used to estimate the state of a nonlinear syste
 
 The EKF algorithm consists of two main steps: prediction and update.
 
-**Prediction Step:**
+**Prediction Step:**  
 
-$$  
-\mathbf{x}_{k|k-1} = f(\mathbf{x}_{k-1|k-1}, \mathbf{u}_k)  
-$$  
+$$
+\mathbf{x}_{k|k-1} = f(\mathbf{x}_{k-1|k-1}, \mathbf{u}_k)
+$$
 
 $$
 \mathbf{P}_{k|k-1} = \mathbf{F}_k \mathbf{P}_{k-1|k-1} \mathbf{F}_k^T + \mathbf{Q}_k
 $$
 
 Where:
-- $\mathbf{x}_{k|k-1}$ is the predicted state estimate.
-- $\mathbf{P}_{k|k-1}$ is the predicted error covariance.
-- $f$ is the state transition function.
-- $\mathbf{F}_k$ is the Jacobian matrix of $f$ evaluated at $\mathbf{x}_{k-1|k-1}$.
-- $\mathbf{Q}_k$ is the process noise covariance matrix.
+<ul>
+  <li>$\mathbf{x}_{k|k-1}$ is the predicted state estimate.</li>
+  <li>$\mathbf{P}_{k|k-1}$ is the predicted error covariance.</li>
+  <li>$f$ is the state transition function.</li>
+  <li>$\mathbf{F}_k$ is the Jacobian matrix of $f$ evaluated at $\mathbf{x}_{k-1|k-1}$. </li>
+  <li>$\mathbf{Q}_k$ is the process noise covariance matrix.</li>
+</ul>
 
-**Update Step:**
+
+**Update Step:**  
 
 $$
 \mathbf{y}_k = \mathbf{z}_k - h(\mathbf{x}_{k|k-1})
@@ -225,15 +228,16 @@ $$
 $$
 
 Where:
-- $\mathbf{y}_k$ is the measurement residual.
-- $\mathbf{S}_k$ is the measurement covariance.
-- $h$ is the measurement function.
-- $\mathbf{H}_k$ is the Jacobian matrix of $h$ evaluated at $\mathbf{x}_{k|k-1}$.
-- $\mathbf{R}_k$ is the measurement noise covariance matrix.
-- $\mathbf{K}_k$ is the Kalman gain.
-- $\mathbf{x}_{k|k}$ is the updated state estimate.
-- $\mathbf{P}_{k|k}$ is the updated error covariance.
-
+<ul>
+ <li> $\mathbf{y}_k$ is the measurement residual.  </li>
+ <li> $\mathbf{S}_k$ is the measurement covariance.</li>
+ <li> $h$ is the measurement function.</li>
+ <li> $\mathbf{H}_k$ is the Jacobian matrix of $h$ evaluated at $\mathbf{x}_{k|k-1}$.</li>
+ <li> $\mathbf{R}_k$ is the measurement noise covariance matrix.</li>
+ <li> $\mathbf{K}_k$ is the Kalman gain.</li>
+ <li> $\mathbf{x}_{k|k}$ is the updated state estimate.</li>
+ <li> $\mathbf{P}_{k|k}$ is the updated error covariance.</li>
+</ul>
 - The results obtained from WLS and EKF method are displayed below.
 
 <p align="center">
