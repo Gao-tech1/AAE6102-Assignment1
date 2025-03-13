@@ -56,7 +56,7 @@ settings.skipNumberOfBytes     = 0;% 215*4e6*2*2;% 1000;%7000*26000*2;
 % the post-processing mode
 % settings.fileName           = 'G:\GNSS_IF_data\USRP B210\12Nov2022_B210_6.dat';%'C:\Users\gnss\Desktop\Discussion\Amungo Navigation for NUT4NT+\dump_ch1.bin';  
 % settings.fileName           = "B:\aae6102\data\opensky\Opensky.bin";
-settings.fileName           = "B:\aae6102\data\urban\Urban.dat";
+settings.fileName           = "D:\aae6102\data\urban\Urban.dat";
 % Data type used to store one sample
 settings.dataType           = 'schar';%'schar';  
  

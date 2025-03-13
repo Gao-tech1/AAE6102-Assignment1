@@ -17,8 +17,10 @@ This assignment focuses on processing **GNSS Software-Defined Receiver (SDR) sig
 | Open-Sky  | 1575.42 MHz | 4.58 MHz | 58 MHz | 8-bit I/Q samples | (22.328444770087565, 114.1713630049711) | 90 seconds | 14/10/2021 12.21pm|
 | Urban     | 1575.42 MHz | 0 MHz | 26 MHz | 8-bit I/Q samples | (22.3198722, 114.209101777778) | 90 seconds | 07/06/2019 04.49am |
 
-![Data Collection Locations](https://github.com/IPNL-POLYU/AAE6102-assignments/blob/main/Picture1.png?raw=true)
-<center>Figure 0. Data Collection Locations</center>
+<p align="center">
+    <img src="https://github.com/IPNL-POLYU/AAE6102-assignments/blob/main/Picture1.png?raw=true" width="100%">
+</p>
+<p align="center">Figure 0. Data Collection Locations</p>
 
 ## Assignment Tasks  
 
@@ -27,17 +29,25 @@ Process the **IF data** using a **GNSS SDR** and generate the initial acquisitio
 
 **Solution:**
 
-![Not Acquired Signal](result/opensky/PRN1.png)
-<center>Figure 1.1 Not Acquired Signal</center><br>
+<p align="center">
+    <img src="result/opensky/PRN1.png" width="100%">
+</p>
+<p align="center">Figure 1.1 Not Acquired Signal</p>
 
-![Acquired Signal](result/opensky/PRN16.png)
-<center>Figure 1.2 Acquired Signal</center><br>
+<p align="center">
+    <img src="result/opensky/PRN16.png" width="100%">
+</p>
+<p align="center">Figure 1.2 Acquired Signal</p>
 
-![Open Acquisition Results](result/opensky/Acquired_Satellites_opensky.png)
-<center>Figure 1.3 Open-Sky Acquisition Results</center><br>
-  
-![Urban Acquisition Results](result/urban/Acquired_Satellite_urban.png)
-<center>Figure 1.4 Urban Acquisition Results</center><br>
+<p align="center">
+    <img src="result/opensky/Acquired_Satellites_opensky.png" width="100%">
+</p>
+<p align="center">Figure 1.3 Open-Sky Acquisition Results</p>
+
+<p align="center">
+    <img src="result/urban/Acquired_Satellite_urban.png" width="100%">
+</p>
+<p align="center">Figure 1.4 Urban Acquisition Results</p>
 
 ---
 
@@ -46,24 +56,32 @@ Adapt the **tracking loop (DLL)** to generate **correlation plots** and analyze 
 
 **Solution:**
 
-![Track Results of Open-Sky PRN 16](result/opensky/PRN16tracking.png)
-<center>Figure 2.1 Tracking Results for Open-Sky PRN 16</center><br>
+<p align="center">
+    <img src="result/opensky/PRN16tracking.png" width="100%">
+</p>
+<p align="center">Figure 2.1 Tracking Results for Open-Sky PRN 16</p>
 
-![Open-Sky Correlation Results with Multi-correlator in 4 Epochs](result/opensky/multi_corrrelator.png)
-<center>Figure 2.2 Open-Sky Correlation Results with Multi-correlator in 4 Epochs</center><br>
+<p align="center">
+    <img src="result/opensky/multi_corrrelator.png" width="100%">
+</p>
+<p align="center">Figure 2.2 Open-Sky Correlation Results with Multi-correlator in 4 Epochs</p>
 
-![Urban Correlation Results with Multi-correlator in 4 Epochs](result/urban/multicorrelator_urban.png)
-<center>Figure 2.3 Urban Correlation Results with Multi-correlator in 4 Epochs</center><br>
+<p align="center">
+    <img src="result/urban/multicorrelator_urban.png" width="100%">
+</p>
+<p align="center">Figure 2.3 Urban Correlation Results with Multi-correlator in 4 Epochs</p>
 
-![Track Results of Urban PRN 1](result/urban/PRN1tracking.png)
-<center>Figure 2.4 Tracking Results for Urban PRN 1</center><br>
+<p align="center">
+    <img src="result/urban/PRN1tracking.png" width="100%">
+</p>
+<p align="center">Figure 2.4 Tracking Results for Urban PRN 1</p>
 
-***Impact of Urban Interference***  
+**Impact of Urban Interference**  
 - Multipath Effects: Reflected signals cause constructive and destructive interference, leading to distorted correlation peaks.  
 - NLOS Receptions: Signals arriving via indirect paths introduce biases in the pseudorange measurements.  
 - Signal Attenuation: Buildings and other structures can attenuate the signal, reducing the signal-to-noise ratio (SNR) for satellites of Channel 3 and Channel 4.    
 
-***Discussion***  
+**Discussion**  
 - In the open-sky environment, the DLL performs well with clear correlation peaks, allowing for accurate tracking.  
 - In the urban environment, the DLL performance degrades due to interference, resulting in less accurate and less stable tracking.  
 Multiple correlators help in maintaining lock by providing a more robust estimate of the signal phase.
@@ -116,7 +134,6 @@ Using the pseudorange measurements obtained from tracking, implement the **Weigh
 - Compare the results with the **ground truth**.  (Please see Task 5)
 - Discuss the impact of **multipath effects** on the WLS solution.
 
-
 **Solution:**
 
 **Weighted Least Squares (WLS) Algorithm:**
@@ -133,7 +150,7 @@ Where:
 - $\mathbf{x}$ is the state vector (position and velocity).
 - $\mathbf{y}$ is the vector of pseudorange measurements.
 - $\mathbf{H}$ is the design matrix that maps the state vector to the measurements.
-- $\mathbf{W}$ is the weight matrix, typically the inverse of the measurement covariance matrix.
+- $\mathbf{W}$ is the weight matrix, which is a diagonal matrix, with its diagonal elements being sin(el).
 
 The solution is obtained by solving:
 
@@ -142,15 +159,19 @@ $$
 $$
 
 - The user **position** in opensky and urban scenario are displayed below.    
-![WLS Position Result of Open-Sky](result/opensky/WLSPosition.png)
-<center>Figure 4.1 WLS Position Results for Open-Sky</center><br>
 
-![WLS Position Result of Urban](result/urban/WLSposition.png)
-<center>Figure 4.2 WLS Position Results for Urban</center><br>
+<p align="center">
+    <img src="result/opensky/WLSPosition.png" width="100%">
+</p>
+<p align="center">Figure 4.1 WLS Position Results for Open-Sky</p>
+
+<p align="center">
+    <img src="result/urban/WLSposition.png" width="100%">
+</p>
+<p align="center">Figure 4.2 WLS Position Results for Urban</p>
 
 - Discuss the impact of **multipath effects** on the WLS solution.  
 Multipath effects cause signal reflections and interference, leading to biased pseudorange and doppler frequency measurements. In urban areas, this results in wider and less defined correlation peaks, making it harder for the DLL to maintain lock. Consequently, the WLS solution experiences larger position and velocity errors due to these distorted measurements, significantly degrading overall positioning accuracy.
-
 
 ---
 
@@ -166,9 +187,9 @@ The EKF algorithm consists of two main steps: prediction and update.
 
 **Prediction Step:**
 
-$$
-\mathbf{x}_{k|k-1} = f(\mathbf{x}_{k-1|k-1}, \mathbf{u}_k)
-$$
+$$  
+\mathbf{x}_{k|k-1} = f(\mathbf{x}_{k-1|k-1}, \mathbf{u}_k)  
+$$  
 
 $$
 \mathbf{P}_{k|k-1} = \mathbf{F}_k \mathbf{P}_{k-1|k-1} \mathbf{F}_k^T + \mathbf{Q}_k
@@ -213,22 +234,30 @@ Where:
 - $\mathbf{x}_{k|k}$ is the updated state estimate.
 - $\mathbf{P}_{k|k}$ is the updated error covariance.
 
-
 - The results obtained from WLS and EKF method are displayed below.
-![Open-Sky Position Solution with WLS and EKF](result/opensky/WLS_EKF_position.png)
-<center>Figure 5.1 Open-Sky Position Solution with WLS and EKF</center><br>
 
-![Open-Sky Velocity Solution with WLS and EKF](result/opensky/velocity.png)
-<center>Figure 5.2 Open-Sky Velocity Solution with WLS and EKF</center><br>
+<p align="center">
+    <img src="result/opensky/WLS_EKF_position.png" width="100%">
+</p>
+<p align="center">Figure 5.1 Open-Sky Position Solution with WLS and EKF</p>
 
-![Urban Position Solution with WLS and EKF](result/urban/WLS_EKF_position.png)
-<center>Figure 5.3 Urban Position Solution with WLS and EKF</center><br>
+<p align="center">
+    <img src="result/opensky/velocity.png" width="100%">
+</p>
+<p align="center">Figure 5.2 Open-Sky Velocity Solution with WLS and EKF</p>
 
-![Urban Velocity Solution with WLS and EKF](result/urban/WLS_EKF_velocity.png)
-<center>Figure 5.4 Urban Velocity Solution with WLS and EKF</center><br>
+<p align="center">
+    <img src="result/urban/WLS_EKF_position_basemap.png" width="100%">
+</p>
+<p align="center">Figure 5.3 Urban Position Solution with WLS and EKF</p>
 
+<p align="center">
+    <img src="result/urban/WLS_EKF_velocity.png" width="100%">
+</p>
+<p align="center">Figure 5.4 Urban Velocity Solution with WLS and EKF</p>
 
 ---
+
 ## Acknowledgement
 
 Thanks for kimichat polishing the format.
@@ -237,4 +266,3 @@ Thanks for kimichat polishing the format.
 
 ## References
 1. Takasu Tomoji. (2009). RTKLIB: Open Source Program Package for RTK-GPS. FOSS4G 2009. Tokyo, Japan, November 2, 2009.
-2. 

@@ -41,7 +41,7 @@ A       = zeros(nmbOfSatellites, 4);
 omc     = zeros(nmbOfSatellites, 1);
 az      = zeros(1, nmbOfSatellites);
 el      = az;
-
+W = zeros(nmbOfSatellites,nmbOfSatellites);
 %=== Iteratively find receiver position ===================================
 for iter = 1:nmbOfIterations
 
@@ -50,6 +50,8 @@ for iter = 1:nmbOfIterations
             %--- Initialize variables at the first iteration --------------
             Rot_X = X(:, i);
             trop = 2;
+            W(i,i)=1; % add by Yixin
+            x=[0 0 0 0]';
         else
             %--- Update equations -----------------------------------------
             rho2 = (X(1, i) - pos(1))^2 + (X(2, i) - pos(2))^2 + ...
@@ -64,7 +66,7 @@ for iter = 1:nmbOfIterations
             
             %--- Find the elevation angel of the satellite ----------------
             [az(i), el(i), ~] = topocent(pos(1:3, :), Rot_X - pos(1:3, :));
-
+            W(i,i) = sin(el(i)); % add by Yixin
             if (settings.useTropCorr == 1)
                 %--- Calculate tropospheric correction --------------------
                 trop = tropo(sin(el(i) * dtr), ...
@@ -84,8 +86,9 @@ for iter = 1:nmbOfIterations
                      (-(Rot_X(2) - pos(2))) / norm(Rot_X - pos(1:3), 'fro') ...
                      (-(Rot_X(3) - pos(3))) / norm(Rot_X - pos(1:3), 'fro') ...
                      1 ];
+        
     end % for i = 1:nmbOfSatellites
-
+    
     % These lines allow the code to exit gracefully in case of any errors
     if rank(A) ~= 4
         pos     = zeros(1, 4);
@@ -94,11 +97,13 @@ for iter = 1:nmbOfIterations
         return
     end
 
-    %--- Find position update (in the least squares sense)-----------------
-    x   = A \ omc;
-    
+    %--- Find position update (in the weighted least squares sense)-----------------
+    x   = (A'*W*A)^(-1)*A'*W*omc;
+    % x   = A \ omc;
+
     %--- Apply position update --------------------------------------------
     pos = pos + x;
+    
     
 end % for iter = 1:nmbOfIterations
 
